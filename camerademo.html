@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>マイファッションメーカー</title>
+    <!-- CSSファイルをリンク -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header style="background-image: url('images/header.png')">
+      <!-- <h3>タブメニュー</h3> -->
+      <button id="back-button">
+        <img src="images/backbtn.png" alt="戻る" />
+      </button>
+
+      <!-- インジケーターがでます -->
+      <span id="indicator"></span>
+
+      <div id="menu-icon">
+        <!-- &#9776; -->
+        <img src="images/menuicon.png" alt="メニュー" />
+      </div>
+      <nav id="nav-menu">
+        <ul style="background-image: url(images/tabmenu_backg.png)">
+          <li id="li1">
+            <!-- 服の種類選択画面に戻る -->
+            <img src="images/menu_1.png" alt="服の種類選択画面に戻る" />
+          </li>
+          <li id="li2">
+            <!-- アプリ概要 -->
+            <img src="images/menu_2.png" alt="アプリ概要" />
+          </li>
+          <li id="li3">
+            <!-- 利用規約 -->
+            <img src="images/menu_3.png" alt="利用規約" />
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- 追加: オーバーレイ要素 -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- 規約画面 scr0 -->
+    <!-- 規約は別にして、スタート画面にする -->
+    <div class="scr" id="kiyaku">
+      <img
+        class="text"
+        src="images/text_gaiyou.png"
+        alt="このアプリでできること"
+      />
+      <button id="kiyakudoui">
+        <img src="images/startbtn.png" alt="スタート" />
+      </button>
+    </div>
+
+    <!-- タイプ選択画面 scr1 -->
+    <div class="scr" id="typeselect">
+      <!-- <p>服の種類を選んでください</p> -->
+      <img
+        class="text"
+        src="images/text_1.png"
+        alt="服の種類と撮影方法を選んでください"
+      />
+
+      <div id="typeselectbtns">
+        <button
+          id="tops"
+          class="topbottom"
+          onclick="toggleVisibility('tops-buttons')"
+        >
+          <img src="images/topsbtn.png" alt="トップス" />
+        </button>
+        <button
+          id="hiddenbottom"
+          class="topbottom"
+          onclick="toggleVisibility('bottoms-buttons')"
+        >
+          <img src="images/bottomsbtn.png" alt="ボトムス" />
+        </button>
+        <button id="dress">
+          <img src="images/dressbtn.png" alt="ワンピース" />
+        </button>
+
+        <!-- 子ボタン: トップス -->
+        <div class="hidden-buttons" id="tops-buttons">
+          <button id="outcamera">
+            <img src="images/outcamera.png" alt="置く" />
+          </button>
+          <button id="incamera">
+            <img src="images/incamera.png" alt="着用" />
+          </button>
+        </div>
+
+        <!-- 子ボタン: ボトムス -->
+        <div class="hidden-buttons" id="bottoms-buttons">
+          <button id="bottom_outcamera">
+            <img src="images/bottom_out.png" alt="置く" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- トップス画面orボトムス画面　(テンプレ選択) scr2 -->
+    <div class="scr" id="tempselect">
+      <!-- <p>服の種類を選択してください</p> -->
+      <img
+        class="text"
+        src="images/text_2.png"
+        alt="テンプレートを選んでください"
+      />
+      <div id="button-container" class="scroll-box">
+        <div class="f_area">
+          <!-- ボタンがここに追加される(横スクロール) -->
+        </div>
+      </div>
+    </div>
+    <!-- 撮影注意画面 scr3 -->
+    <div class="scr" id="Beforeshooting">
+      <img class="text" src="images/text_3.png" alt="撮影時の注意点" />
+      <button id="startshoot">
+        <img src="images/satueikaisi.png" alt="撮影開始" />
+      </button>
+    </div>
+    <!-- 前面撮影画面 scr4 -->
+    <div class="scr" id="shooting">
+      <img
+        class="text"
+        id="shootingtext"
+        src="images/text_4.png"
+        alt="撮影してください"
+      />
+      <!-- カメラ本体 -->
+      <div class="camera-container">
+        <video id="video" autoplay muted playsinline></video>
+        <div>
+          <!-- ガイドフレーム -->
+          <img class="guide-frame" src="" alt="フレーム画像がでます" />
+          <!-- 追加: タイマー表示 -->
+          <div id="timer">5</div>
+        </div>
+      </div>
+      <!-- ↓撮影のための描画キャンバス -->
+      <canvas id="canvas" style="visibility: hidden"></canvas>
+
+      <!-- 撮影ボタン類 -->
+      <div class="btnGroup">
+        <button id="upbtn"><img src="images/uploadbtn.png" alt="img" /></button>
+        <button id="capture">
+          <img src="images/capturebtn.png" alt="撮影" />
+        </button>
+        <button id="toggle-camera">
+          <img src="images/toggle.png" alt="切替" />
+        </button>
+      </div>
+    </div>
+
+    <!-- 前面確認画面 scr5 -->
+    <div class="scr" id="previewF">
+      <!-- <p>プレビュー（前）</p> -->
+
+      <div class="photostyle">
+        <img id="photoF" alt="ここに撮影した前面画像がでます" />
+        <div class="previewbtns">
+          <button class="retakestyle" id="RetakeF">
+            <img src="images/retake.png" alt="撮りなおす" />
+          </button>
+          <button id="nextshoot">
+            <img src="images/nextShot.png" alt="保存して進む" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 背面撮影画面 scr6 -->
+    <div class="scr" id="shootingB">
+      <img class="text" src="images/text_5.png" alt="撮影してください" />
+      <!-- カメラ本体 -->
+      <div class="camera-container">
+        <video id="videoB" autoplay muted playsinline></video>
+        <div>
+          <!-- ガイドフレーム -->
+          <img class="guide-frameB" src="" alt="フレーム画像がでます" />
+          <!-- 追加: タイマー表示 -->
+          <div id="timerB">5</div>
+        </div>
+      </div>
+      <!-- ↓撮影のための描画キャンバス -->
+      <canvas id="canvasB" style="visibility: hidden"></canvas>
+
+      <!-- 撮影ボタン類 -->
+      <div class="btnGroup">
+        <button id="upbtn"><img src="images/uploadbtn.png" alt="img" /></button>
+        <button id="captureB">
+          <img src="images/capturebtn.png" alt="撮影" />
+        </button>
+        <button id="toggle-cameraB">
+          <img src="images/toggle.png" alt="切替" />
+        </button>
+      </div>
+    </div>
+
+    <!-- 確認画面（背） scr7 -->
+    <div class="scr" id="previewB">
+      <!-- <p>プレビュー（背）</p> -->
+      <div class="photostyle">
+        <img id="photoB" alt="ここに撮影した背面画像がでます" />
+        <div class="previewbtns">
+          <button class="retakestyle" id="RetakeB">
+            <img src="images/retake.png" alt="撮りなおす" />
+          </button>
+          <button id="Shootingfinish">
+            <img src="images/nextShot.png" alt="保存して進む" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- トップスの場合の袖選択画面3つ  scr8-->
+    <div class="scr" id="sleeve1">
+      <!-- <p>袖と背面部分は<br />同じデザイン（色や柄）ですか</p> -->
+      <img class="text" src="images/text_6.png" alt="袖と背面部分は" />
+      <button onclick="toggleChildButtons('sleeve1-yes')">
+        <img src="images/sleevebtn_1.png" alt="同じ色や柄" />
+      </button>
+      <button id="sleeveParent" onclick="handleAnswer('no', 'sleeve1')">
+        <img
+          src="images/sleevebtn_2.png"
+          alt="袖だけ違う色や柄（重ね着含む）"
+        />
+      </button>
+      <!-- 子ボタン: 袖1-同じ色柄 -->
+      <div class="child-buttons" id="sleeve1-yes" style="display: none">
+        <button onclick="handleAnswer('yes', 'sleeve3')">
+          <img src="images/sleevebtn_3.png" alt="背面にデザインが入っている" />
+        </button>
+        <button onclick="handleAnswer('no', 'sleeve3')">
+          <img
+            src="images/sleevebtn_4.png"
+            alt="背面にデザインが入っていない"
+          />
+        </button>
+      </div>
+    </div>
+    <!--トップスの場合の袖選択画面3つ  scr9  -->
+    <div class="scr" id="sleeve2">
+      <!-- <p>袖部分を撮影してください</p>
+      <p>柄がある場合・・・</p> -->
+      <img
+        class="text"
+        src="images/text_7.png"
+        alt="袖部分を撮影してください"
+      />
+      <!-- カメラ本体 -->
+      <div class="camera-container">
+        <video id="video2" autoplay muted playsinline></video>
+        <div>
+          <!-- ガイドフレーム -->
+          <img class="guide-frame2" src="" alt="袖フレーム画像がでます" />
+          <!-- 追加: タイマー表示 -->
+          <div id="timer">5</div>
+        </div>
+      </div>
+      <!-- ↓撮影のための描画キャンバス -->
+      <canvas id="canvas2" style="visibility: hidden"></canvas>
+
+      <!-- 撮影ボタン類 -->
+      <div class="btnGroup">
+        <button id="upbtn2">
+          <img src="images/uploadbtn.png" alt="img" />
+        </button>
+        <button id="capture2">
+          <img src="images/capturebtn.png" alt="撮影" />
+        </button>
+        <button id="toggle-camera2">
+          <img src="images/toggle.png" alt="切替" />
+        </button>
+      </div>
+    </div>
+    <!--トップスの場合の袖選択画面3つ  scr10  -->
+    <div class="scr" id="sleeve3">
+      <!-- <p>この画像をテンプレートに使用します</p> -->
+
+      <div class="photostyle">
+        <img id="photoS" alt="ここに撮影した袖画像がでます" />
+        <div class="previewbtns">
+          <button class="retakestyle" id="RetakeS">
+            <img src="images/retake.png" alt="撮りなおす" />
+          </button>
+          <button id="sleeveFinish">
+            <img src="images/nextShot.png" alt="保存して進む" />
+          </button>
+        </div>
+      </div>
+      <canvas id="input" style="display: none"></canvas>
+      <canvas id="output" style="visibility: hidden"></canvas>
+    </div>
+
+    <!-- 確認画面（最終）scr11 -->
+    <div class="scr" id="finalconfirmation">
+      <!-- <p>完成したテンプレート</p> -->
+      <div class="text_8_9-div">
+        <img class="text" src="images/text_8.png" alt="完成したテンプレート" />
+      </div>
+      <div class="result-image-div">
+        <img
+          id="resultimg"
+          class="result-image"
+          src="images/kansei_demo.png"
+          alt="完成した型紙画像"
+        />
+      </div>
+
+      <div class="previewbtns">
+        <button id="retakeAll">
+          <img src="images/retakeAllbtn.png" alt="最初から撮り直す" />
+        </button>
+        <a id="download"
+          ><img src="images/downloadbtn.png" alt="ダウンロード"
+        /></a>
+      </div>
+    </div>
+
+    <!-- 最終画面 scr12 -->
+    <div class="scr" id="final-screen">
+      <div class="text_8_9-div">
+        <img
+          class="text"
+          src="images/text_9_1.png"
+          alt="作成したテンプレートは"
+        />
+        <p>「 <span id="templateValue"></span> 」</p>
+        <img
+          id="text_9_2"
+          src="images/text_9_2.png"
+          alt="ダウンロードしたテンプレートはメタバースアプリにアップロードすることで使用可能です"
+        />
+      </div>
+      <div class="result-image-div">
+        <img
+          class="result-image"
+          src="images/kansei_demo.png"
+          alt="完成した型紙画像"
+        />
+      </div>
+      <button id="typeselectbtn">
+        <img src="images/typeselectbtn.png" alt="他のテンプレートを作成する" />
+      </button>
+      <button onclick="closeapp()">
+        <img src="images/closebtn.png" alt="アプリを終了する" />
+      </button>
+    </div>
+
+    <div class="scr" id="gaiyouTab">
+      <!-- メニューからの遷移画面 scr13 -->
+      <img
+        class="text"
+        src="images/text_gaiyou.png"
+        alt="このアプリでできること"
+      />
+      <button class="TabBack">
+        <img src="images/tabbtn.png" alt="前の画面に戻る" />
+      </button>
+    </div>
+    <!-- メニューからの遷移先画面 scr14 -->
+    <div class="scr" id="kiyakuTab">
+      <img id="kiyakutxt" src="images/text_kiyaku.png" alt="利用規約" />
+      <div id="kiyakuBox">
+        <p>
+          【利用規約】<br />
+          この規約（以下、「本規約」といいます。）は、MUCHUプロジェクト（以下、「当プロジェクト」といいます。）の提供するアプリケーション「マイファッションメーカー」（以下、「本アプリ」といいます。）の利用に関する条件を、本アプリを利用する全ての方（以下、「利用者」といいます。）と当プロジェクトの間に定めるものです。本規約に同意した上で本アプリをご利用ください。
+          <br /><br />
+          本アプリは、服の画像を用いて、アバターの衣装テンプレートのデザインを加工する機能を有する、当プロジェクトが提供する「マイファッションメーカー」と称するソフトウェアプログラムです。
+          <br /><br />
+          第1条　(総論)
+          <br />
+          1.当プロジェクトは、利用者が本規約を遵守することを条件として、利用者に非独占的かつ譲渡不能な本アプリ等の利用権を許諾します。
+          <br />
+          2.当プロジェクトは、利用者への事前の通知なく、必要に応じて、本アプリ等の内容を、変更、追加又は改良できるものとします。
+          <br />
+          3.本アプリ等に関する一切の知的財産権は、当プロジェクト又は当プロジェクトに本アプリ等に関するライセンスを許諾している者に帰属します。
+          <br />
+          4.前項の規定にかかわらず、利用者が本アプリを利用して作成したテンプレート（以下、「作成テンプレート」といいます。）の著作権、利用権及びその他の一切の権利は、当プロジェクトに帰属しないものとします。利用者は、利用者の責任のもと、作成テンプレートを自由に利用することができます。
+          <br />
+          5.利用者は、自らの責任において本アプリ等を利用するものとし、利用者が本アプリ等に関して行った一切の行為及びその結果については利用者が一切の責任を負うものとし、当プロジェクトはその責任を一切負いません。
+          <br />
+          6.利用者の本アプリ等の利用に起因して、当プロジェクトに直接的又は間接的に何らかの損害が生じた場合（利用者の本アプリ等の利用に起因して、当プロジェクトが、第三者よりクレーム等を受けた場合も含みます。）、利用者は、当プロジェクトの請求に従って直ちに全ての損害（弁護士費用の負担も含みます。）を賠償するものとします。
+          <br /><br />
+          第2条（禁止事項）<br />
+          利用者は、本アプリの利用にあたり、以下の行為をしてはなりません。<br />
+          1.法令または公序良俗に違反する行為
+          <br />
+          2.犯罪行為に関連する行為
+          <br />
+          3.本アプリの内容等、本アプリに含まれる著作権、商標権ほか知的財産権を侵害する行為
+          <br />
+          4.当プロジェクト、ほかの利用者、またはその他第三者のサーバーまたはネットワークの機能を破壊したり、妨害したりする行為
+          <br />
+          5.本アプリによって得られた情報を商業的に利用する行為
+          <br />
+          6.当プロジェクトのアプリの運営を妨害するおそれのある行為
+          <br />
+          7.不正アクセスをし、またはこれを試みる行為
+          <br />
+          8.不正な目的を持って本アプリを利用する行為
+          <br />
+          9.その他、当プロジェクトが不適切と判断する行為
+          <br /><br />
+          第3条（保証の否認）<br />
+          当プロジェクトは、本アプリに事実上または法律上の瑕疵（安全性、信頼性、正確性、完全性、有効性、特定の目的への適合性、セキュリティなどに関する欠陥、エラーやバグ、権利侵害などを含みます。）がないことを明示的にも黙示的にも保証しておりません。<br />
+          <br /><br />
+          第4条　(当プロジェクトの免責)<br />
+          1.当プロジェクトは、当プロジェクトに故意又は重過失が存する場合を除いて、本アプリ等に起因して利用者に生じたいかなる損害についても一切の責任を負いません。なお、次に掲げる損害は、本条の定めにより当プロジェクトが免責される損害を明確化のために例示的に列挙しているものであり、当プロジェクトが本条の規定に基づき免責されるのは、これらの損害が生じた場合に限定されません。
+          <br />
+          2.本アプリ等の内容の変更等又は本アプリの提供の中断等に起因して利用者に生じた一切の損害
+          <br />
+          3.作成テンプレートを作成する過程で、又は作成した結果生じた一切の損害
+          <br />
+          4.作成テンプレートが不正確であったために生じた一切の損害
+          <br />
+          5.利用者が作成テンプレートを利用したことにより生じた一切の損害
+          <br />
+          6.作成テンプレートの滅失等により生じた一切の損害
+          <br /><br />
+          第5条　(本規約の変更)<br />
+          当プロジェクトは、当プロジェクトが必要と判断する場合、本アプリの目的の範囲内で、本規約を変更できるものとします。その場合、当プロジェクトは、変更後の本規約の内容ならびに適用開始日を、本アプリ上に表示し、または当プロジェクトが定める方法により利用者に通知することで利用者に周知するものとし、変更後の本規約は、適用開始日から効力を生じるものとします。<br />
+          <br /><br />
+          第6条（権利義務の譲渡の禁止）<br />
+          利用者は、当プロジェクトの書面による事前の承諾なく、利用契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し、または担保に供することはできません。
+          <br /><br />
+          【2024/09/13】
+        </p>
+      </div>
+
+      <button class="TabBack">
+        <img src="images/tabbtn.png" alt="前の画面に戻る" />
+      </button>
+    </div>
+
+    <!-- ここからJS !!! -->
+    <script src="script.js"></script>
+    <!-- JSファイルをリンク -->
+  </body>
+</html>

@@ -1,0 +1,462 @@
+body {
+  margin: 0;
+}
+.scr {
+  text-align: center;
+}
+button {
+  background: transparent; /* 画像の背景を透過 */
+  border: none;
+}
+/* BIZ UDゴシックの設定 */
+@font-face {
+  font-family: "BIZ UD Gothic";
+  src: url("fonts/BIZUDGothic-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/* HG丸ゴシックM-PROの設定 */
+@font-face {
+  font-family: "HG丸ゴシックM-PRO";
+  src: url("fonts/HGMaruGothicMPRO.TTF") format("truetype");
+  /* url("path/to/HG丸ゴシックM-PRO.woff") format("woff"), */
+  font-weight: normal;
+  font-style: normal;
+}
+
+.TabBack {
+  margin-top: 25px;
+}
+.text {
+  margin-top: 24px;
+}
+#typeselect .text {
+  margin: 37px 0;
+}
+#kiyakuBox {
+  color: #908f8f;
+  font-size: 13px;
+  line-height: 1.4; /* 行間の設定 */
+  font-family: "BIZ UD Gothic", sans-serif;
+
+  margin: auto;
+  padding: 3px;
+  text-align: left;
+  width: 330px;
+  height: 500px;
+  border: 3px solid #175493; /* 境界線 */
+  overflow-y: auto; /* 縦方向にスクロールできるようにする */
+}
+#kiyaku img {
+  margin: 37px 0;
+}
+::-webkit-scrollbar {
+  width: 2px; /* スクロールバーの幅 */
+}
+#kiyakutxt {
+  margin: 37px 0;
+}
+
+#finalconfirmation {
+  display: flex;
+  flex-direction: column; /* 縦に並べる */
+  justify-content: center; /* 縦方向の中央に配置 */
+  align-items: center; /* 横方向の中央に配置 */
+  height: 100vh; /* ビューポートの高さ全体を使用 */
+  text-align: center; /* テキストを中央揃え */
+}
+#finalconfirmation .text {
+  margin: 37px 0;
+}
+.result-image-div {
+  margin: 0 auto;
+  width: 300px;
+  height: 350px;
+  background-color: #ffffff;
+}
+.result-image {
+  margin-top: 0;
+  margin-bottom: 50px;
+  width: 300px;
+  height: 300px;
+}
+
+/* #templateValue  */
+#final-screen {
+  text-align: center;
+  font-family: "HG丸ゴシックM-PRO", sans-serif;
+  font-weight: bold;
+  color: #505050;
+  font-size: 17px;
+}
+#final-screen .text {
+  margin-top: 13px;
+}
+#text_9_2 {
+  margin-top: 15px;
+}
+#final-screen p {
+  margin: 0;
+}
+
+.text_8_9-div {
+  text-align: center;
+  height: 167px;
+}
+
+#typeselect,
+#cameraselect,
+#tempselect,
+#Beforeshooting {
+  justify-content: center; /* 横幅の真ん中に配置 */
+  align-items: center; /* 縦方向の中央に配置 */
+  height: 100vh; /* ビューポートの高さ全体を使用 */
+  text-align: center;
+}
+#kiyaku {
+  text-align: center;
+
+  /* font-family: "BIZ UD Gothic", "Noto Sans JP", "Arial", sans-serif; */
+  align-items: center; /* 内部テキストを垂直方向に中央に配置（任意） */
+  justify-content: center; /* 内部テキストを水平方向に中央に配置（任意） */
+}
+#tezyun {
+  text-align: left;
+  margin: 0 auto;
+  width: 80%; /* 必要に応じて調整 */
+}
+
+#typeselect {
+  padding: 0;
+}
+#typeselectbtns {
+  display: flex;
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  width: 100%;
+  align-items: stretch;
+  /* 子要素を親要素の幅に合わせる */
+}
+.topbottom,
+#dress {
+  border-top: 1px solid #bfbfbf;
+}
+#dress img {
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.hidden-buttons {
+  display: none;
+  margin: 10px 0;
+}
+.hidden-buttons button {
+  display: block;
+}
+#kiyakudoui,
+#startshoot {
+  margin-top: 30px;
+}
+
+#tops,
+#hiddenbottom,
+#dress,
+#sleeve1 button {
+  /* color: black; */
+  width: 100%;
+  height: 100px;
+
+  /* height: 100px; */
+  line-height: 1;
+  /* 行の高さを調整（隙間の原因になる場合がある） */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 幅にボーダーとパディングを含める */
+}
+#tops img,
+#hiddenbottom img,
+#dress img {
+  width: 100%;
+  /* height: 100%; */
+}
+.button-img {
+  width: 24px; /* 画像の幅 */
+  height: 24px; /* 画像の高さ */
+  margin-right: 10px; /* 画像とテキストの間隔 */
+  margin-left: 0;
+}
+
+#bottoms-buttons,
+#tops-buttons {
+  margin-top: 0;
+  border-bottom: 0;
+}
+
+#outcamera,
+#incamera,
+#bottom_outcamera {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  /* 行の高さを調整（隙間の原因になる場合がある） */
+}
+#outcamera,
+#incamera {
+  height: 100px;
+}
+#outcamera img,
+#incamera img,
+#bottom_outcamera img,
+#sleeve1 button img {
+  border-top: 1px solid #bfbfbf;
+  border-bottom: 1px solid #bfbfbf;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle; /* ボタン内での縦位置調整 */
+}
+#bottom_outcamera img {
+  border-bottom: 1px solid #bfbfbf;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle; /* ボタン内での縦位置調整 */
+}
+
+.scroll-box {
+  height: 300px;
+  overflow-x: scroll; /* 横スクロールを可能にする */
+  padding-bottom: 10px; /* スクロールバーのためのパディング */
+  -webkit-overflow-scrolling: touch; /* スムーズなスクロールを提供 */
+}
+
+.scroll-box::-webkit-scrollbar {
+  height: 0; /* スクロールバーの高さ */
+}
+.f_area {
+  width: 1250px;
+  display: flex; /* 子要素を横に並べるためのフレックスボックス */
+  flex-wrap: nowrap; /* 子要素が折り返されないようにする */
+}
+
+.scroll-box .f_area button {
+  flex: 0 0 80%; /* 各ボタンの幅を親要素の80%に設定 */
+  margin-right: 10px; /* ボタン間のスペース */
+  box-sizing: border-box; /* ボックスサイズにパディングを含める */
+}
+/* .scroll-box .f_area .f_one {
+  width: 33.333%;
+} */
+.scroll-box .f_area button img {
+  width: 100%; /* 画像の幅を親要素に合わせる */
+  height: auto; /* 画像の高さを自動調整 */
+  vertical-align: top;
+}
+#Beforeshooting .text {
+  margin-top: 39px;
+}
+#shooting {
+  text-align: center;
+}
+#shootingtext,
+#sleeve2 .text {
+  margin: 11px 0;
+}
+#sleeve2 {
+  text-align: center;
+}
+
+#photoF,
+#photoB,
+#photoS {
+  max-width: 300px;
+}
+.photostyle {
+  text-align: center;
+  margin-top: 103px;
+}
+
+.previewbtns button {
+  padding: 0;
+  margin: 0;
+}
+.previewbtns {
+  display: flex;
+  flex-direction: column; /* 縦方向に配置 */
+  justify-content: space-between; /* ボタン間のスペースを均等に */
+  margin: 65px auto; /* ボタングループを中央揃え */
+  width: 309px;
+  height: 158px;
+}
+
+.retakestyle,
+#nextshoot,
+#Shootingfinish {
+  width: 309px;
+  height: 69px;
+}
+#sleeve1 {
+  text-align: center;
+}
+#sleeve1 .text {
+  margin: 24px 0;
+}
+
+/* 追加分CSS↑ */
+.scr {
+  display: none;
+}
+.camera-container {
+  position: relative; /* この要素を基準にするため */
+  width: 100%; /* コンテナの幅を100%に設定 */
+  padding-top: 133.33%; /* 3:4 のアスペクト比に基づく高さ (4/3 = 1.3333 = 133.33%) */
+  max-width: 800px;
+}
+#video,
+#videoB,
+#video2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* height: 600px; */
+  /* 縦幅を固定 */
+  /* 横幅は自動調整 */
+  object-fit: cover; /* コンテンツのアスペクト比を保持しつつ、要素のサイズに合わせる */
+}
+#canvas,
+#canvasB,
+#canvas2 {
+  width: 100%;
+  height: 100%;
+}
+.guide-frame,
+.guide-frameB,
+.guide-frame2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  /* height: 300px; */
+  /* overflow: hidden; */
+  background-size: cover; /* 画像をガイドフレームに合わせて拡大縮小 */
+  pointer-events: none; /* ガイド枠がクリックを妨げないようにする */
+}
+
+.btnGroup {
+  position: absolute;
+  top: 84%;
+  left: 50%; /* 左から50%の位置に配置（画面の中央） */
+  transform: translateX(-50%); /* 左右に50%の幅をシフトして中央揃え */
+  /* gap: 10px; ボタン間のスペース（調整可能） */
+  display: flex; /* フレックスボックスを使用 */
+  justify-content: space-between; /* ボタン間のスペースを均等に */
+  width: 300px; /* ボタングループの幅（調整可能） */
+}
+
+/* メニュー */
+header {
+  background-color: #175493;
+  color: white;
+  height: 89px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* 位置を固定するために relative を設定 */
+  z-index: 2; /* メニューより上に表示されるように z-index を設定 */
+}
+
+#menu-icon {
+  background: transparent; /* 画像の背景を透過 */
+  border: none;
+}
+#back-button {
+  background: transparent; /* 画像の背景を透過 */
+  border: none;
+}
+
+#nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* ヘッダーの下にメニューが表示されるように設定 */
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  overflow: hidden;
+  height: 0; /* 初期状態では高さを0にする */
+  transition: height 0.3s ease-out; /* 高さのアニメーション */
+  color: #333;
+}
+
+#nav-menu ul {
+  list-style: none;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+}
+
+#nav-menu ul li {
+  /* padding: 10px; */
+  height: 55px;
+  /* border-bottom: 1px solid #999; */
+}
+#li1 img {
+  width: 100%;
+}
+#li2 img,
+#li3 img {
+  padding: 5px 0;
+  width: 100%;
+}
+
+#nav-menu ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+/* メニューが表示されたときの状態 */
+#nav-menu.show {
+  /* 自動で高さを設定する */
+  height: auto;
+  /* height: 165px; */
+  display: block;
+}
+/* 背景を暗くするオーバーレイ */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒 */
+  display: none;
+  z-index: 1; /* メニューより下に表示されるように設定 */
+}
+.overlay.show {
+  display: block; /* 追加: オーバーレイの表示/非表示を制御 */
+}
+
+/* タイマー */
+#timer,
+#timerB {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2em;
+  color: red;
+  display: none; /* 初期状態では表示しない */
+}
+
+/* 撮影時の注意点 */
+#Beforeshooting {
+  text-align: center;
+}
